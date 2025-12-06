@@ -6,7 +6,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-@RequestMapping("/api/product")
+@RequestMapping("")
 public interface ProductController {
 
     @GetMapping("/products")
