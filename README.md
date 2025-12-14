@@ -32,5 +32,7 @@ Apply manifests:
 kubectl apply -f k8s/postgres-deployment.yaml
 kubectl apply -f k8s/catalog-deployment.yaml
 ```
+
+## Swagger
 http://localhost:8081/v3/api-docs
 http://localhost:8081/swagger-ui/index.html
