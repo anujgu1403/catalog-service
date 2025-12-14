@@ -5,7 +5,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
-@RequestMapping("/catalog")
+@RequestMapping("api/catalog")
 public interface CatalogController {
 
     @GetMapping("/products")
