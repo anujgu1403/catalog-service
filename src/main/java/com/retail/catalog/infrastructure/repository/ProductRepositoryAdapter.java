@@ -53,6 +53,7 @@ public class ProductRepositoryAdapter implements ProductRepository {
         ProductEntity productEntity = productModelToProductEntityMapper.apply(productModel);
         // ensure id is null so JPA will insert
         productEntity.setProduct_id(null);
+        productEntity.setCreated_date(OffsetDateTime.now());
         ProductEntity productEntityResp = productJpaRepository.save(productEntity);
         return productEntityToProductModelMapper.apply(productEntityResp);
     }
