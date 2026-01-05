@@ -9,7 +9,7 @@ public class ProductModelToProductEntityMapper {
     public ProductEntity apply(ProductModel productModel) {
         return ProductEntity.builder()
                 .product_id(productModel.getProductId())
-                .category_id(productModel.getCategoryId())
+                .categoryId(productModel.getCategoryId())
                 .name(productModel.getName())
                 .created_date(productModel.getCreatedDate())
                 .description(productModel.getDescription())

@@ -15,4 +15,6 @@ public interface ProductRepository {
     ProductModel update(ProductModel productModel);
 
     void delete(int id);
+
+    List<ProductModel> getByCategory(Integer categoryId);
 }

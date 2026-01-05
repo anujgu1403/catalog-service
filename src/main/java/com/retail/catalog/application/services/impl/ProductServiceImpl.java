@@ -64,4 +64,11 @@ public class ProductServiceImpl implements ProductService {
     public void delete(int id) {
         productRepositoryAdapter.delete(id);
     }
+
+    @Override
+    public List<Product> getByCategory(Integer categoryId) {
+        return productRepositoryAdapter.getByCategory(categoryId).stream()
+                .map(productModelToProductMapper::apply)
+                .toList();
+    }
 }

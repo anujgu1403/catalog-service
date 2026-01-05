@@ -74,7 +74,7 @@ public class ProductRepositoryAdapter implements ProductRepository {
         existingEntity.setUnit_price(Optional.ofNullable(productEntity.getUnit_price()).orElse(existingEntity.getUnit_price()));
         existingEntity.setDescription(Optional.ofNullable(productEntity.getDescription()).orElse(existingEntity.getDescription()));
         existingEntity.setCreated_date(OffsetDateTime.now());
-        existingEntity.setCategory_id(Optional.ofNullable(productEntity.getCategory_id()).orElse(existingEntity.getCategory_id()));
+        existingEntity.setCategoryId(Optional.ofNullable(productEntity.getCategoryId()).orElse(existingEntity.getCategoryId()));
         existingEntity.setImage_url(Optional.ofNullable(productEntity.getImage_url()).orElse(existingEntity.getImage_url()));
 
         ProductEntity productEntityResp = productJpaRepository.save(existingEntity);
@@ -84,5 +84,21 @@ public class ProductRepositoryAdapter implements ProductRepository {
     @Override
     public void delete(int id) {
         productJpaRepository.deleteById(id);
+    }
+    @Override
+    public List<ProductModel> getByCategory(Integer categoryId) {
+        List<ProductEntity> productEntities;
+
+        if (categoryId == null) {
+            // If categoryId is null, return all products (same as getAll)
+            productEntities = productJpaRepository.findAll();
+        } else {
+            // Use the JPA query method to filter by category_id
+            productEntities = productJpaRepository.findByCategoryId(categoryId);
+        }
+
+        return productEntities.stream()
+                .map(productEntityToProductModelMapper::apply)
+                .toList();
     }
 }

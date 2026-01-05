@@ -2,6 +2,8 @@
 package com.retail.catalog.application.services;
 
 import com.retail.catalog.application.model.Product;
+import com.retail.catalog.domain.ProductModel;
+
 import java.util.List;
 
 public interface ProductService {
@@ -16,4 +18,6 @@ public interface ProductService {
     Product update(Product product);
 
     void delete(int id);
+
+    List<Product> getByCategory(Integer categoryId);
 }

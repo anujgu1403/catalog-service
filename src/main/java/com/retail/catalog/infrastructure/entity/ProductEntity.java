@@ -1,19 +1,15 @@
-
 package com.retail.catalog.infrastructure.entity;
 
 import jakarta.persistence.*;
-import lombok.*;
-
+import lombok.*;  // agar lombok use kar rahe ho
 import java.time.OffsetDateTime;
 
-@Data
-@Getter
-@Setter
-@Builder
-@NoArgsConstructor
-@AllArgsConstructor
 @Entity
 @Table(name = "products")
+@Data  // agar lombok hai, warna manual getters/setters
+@NoArgsConstructor
+@AllArgsConstructor
+@Builder
 public class ProductEntity {
 
     @Id
@@ -32,9 +28,21 @@ public class ProductEntity {
     @Column(nullable = false)
     private String image_url;
 
-    @Column(nullable = false)
-    private Integer category_id;
+    // ← YEHI CHANGE: field camelCase kar do
+    @Column(name = "category_id")  // DB column same rahega
+    private Integer categoryId;     // ← underscore hata diya
 
     @Column(nullable = false)
     private OffsetDateTime created_date;
+
+    // Agar lombok nahi hai toh manual getters/setters
+    public Integer getCategoryId() {
+        return categoryId;
+    }
+
+    public void setCategoryId(Integer categoryId) {
+        this.categoryId = categoryId;
+    }
+
+    // baaki getters/setters...
 }
