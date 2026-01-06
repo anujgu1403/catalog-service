@@ -7,6 +7,7 @@ import com.retail.catalog.application.model.Category;
 import com.retail.catalog.domain.CategoryModel;
 import com.retail.catalog.application.services.CategoryService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -27,47 +28,12 @@ public class CategoryControllerImpl implements CategoryController {
     private CategoryToCategoryModelMapper dtoToModelMapper;
 
     @Override
-    public String list(Model model) {
-        List<CategoryModel> models = categoryService.getAll();
-        List<Category> dtos = models.stream()
+    public ResponseEntity<List<Category>> getAllCategories() {
+        List<Category> categories = categoryService.getAll()
+                .stream()
                 .map(modelToDtoMapper::apply)
                 .toList();
-        model.addAttribute("categories", dtos);
-        return "categories";
-    }
 
-    @Override
-    public String addForm(Model model) {
-        model.addAttribute("category", new Category());
-        return "category-form";
-    }
-
-    @Override
-    public String add(Category category) {
-        CategoryModel model = dtoToModelMapper.apply(category);
-        categoryService.add(model);
-        return "redirect:/categories";
-    }
-
-    @Override
-    public String editForm(Integer id, Model model) {
-        CategoryModel categoryModel = categoryService.getById(id);
-        Category dto = modelToDtoMapper.apply(categoryModel);
-        model.addAttribute("category", dto);
-        return "category-form";
-    }
-
-    @Override
-    public String edit(Integer id, Category category) {
-        category.setCategoryId(id);
-        CategoryModel model = dtoToModelMapper.apply(category);
-        categoryService.update(model);
-        return "redirect:/categories";
-    }
-
-    @Override
-    public String delete(Integer id) {
-        categoryService.delete(id);
-        return "redirect:/categories";
+        return ResponseEntity.ok(categories);
     }
 }
