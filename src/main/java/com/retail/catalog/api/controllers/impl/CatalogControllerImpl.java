@@ -1,3 +1,4 @@
+/*
 package com.retail.catalog.api.controllers.impl;
 
 import com.retail.catalog.api.controllers.CatalogController;
@@ -73,4 +74,4 @@ public class CatalogControllerImpl implements CatalogController {
 
         return ResponseEntity.ok(categories);
     }
-}
+}*/
